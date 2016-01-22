@@ -33,12 +33,11 @@ namespace SpotlightSaver
             this.btnExit = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.txtFilePath = new System.Windows.Forms.TextBox();
-            this.gvSpotlightImages = new System.Windows.Forms.DataGridView();
             this.txtMinimumWidth = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtMinimumHeight = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSpotlightImages)).BeginInit();
+            this.pnImageContainer = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btnExit
@@ -67,16 +66,6 @@ namespace SpotlightSaver
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.Size = new System.Drawing.Size(533, 20);
             this.txtFilePath.TabIndex = 2;
-            // 
-            // gvSpotlightImages
-            // 
-            this.gvSpotlightImages.AllowUserToAddRows = false;
-            this.gvSpotlightImages.AllowUserToDeleteRows = false;
-            this.gvSpotlightImages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvSpotlightImages.Location = new System.Drawing.Point(13, 65);
-            this.gvSpotlightImages.Name = "gvSpotlightImages";
-            this.gvSpotlightImages.Size = new System.Drawing.Size(533, 277);
-            this.gvSpotlightImages.TabIndex = 3;
             // 
             // txtMinimumWidth
             // 
@@ -114,22 +103,29 @@ namespace SpotlightSaver
             this.txtMinimumHeight.Text = "1080";
             this.txtMinimumHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumbersOnly_KeyPress);
             // 
-            // Form1
+            // pnImageContainer
+            // 
+            this.pnImageContainer.AutoScroll = true;
+            this.pnImageContainer.Location = new System.Drawing.Point(12, 65);
+            this.pnImageContainer.Name = "pnImageContainer";
+            this.pnImageContainer.Size = new System.Drawing.Size(534, 277);
+            this.pnImageContainer.TabIndex = 8;
+            // 
+            // ImageList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(558, 383);
+            this.Controls.Add(this.pnImageContainer);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtMinimumHeight);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtMinimumWidth);
-            this.Controls.Add(this.gvSpotlightImages);
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnExit);
-            this.Name = "Form1";
+            this.Name = "ImageList";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.gvSpotlightImages)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,11 +136,11 @@ namespace SpotlightSaver
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.TextBox txtFilePath;
-        private System.Windows.Forms.DataGridView gvSpotlightImages;
         private System.Windows.Forms.TextBox txtMinimumWidth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMinimumHeight;
+        private System.Windows.Forms.Panel pnImageContainer;
     }
 }
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using SpotlightSaver.Domain;
@@ -33,7 +33,7 @@ namespace SpotlightSaver
             var spotlightImages = service.GetSpotlightImages();
             spotlightImages = spotlightImages.Where(x => x.Width >= minimumWidth && x.Height >= minimumHeight).ToList();
 
-            gvSpotlightImages.DataSource = new BindingList<SpotlightImage>(spotlightImages);
+            DrawImageList(spotlightImages);
         }
 
         private void NumbersOnly_KeyPress(object sender, KeyPressEventArgs e)
@@ -48,6 +48,33 @@ namespace SpotlightSaver
             {
                 e.Handled = true;
             }
+        }
+
+        private void DrawImageList(IEnumerable<SpotlightImage> spotlightImages)
+        {
+            var imageNumber = 0;
+
+            foreach (var spotlightImage in spotlightImages)
+            {
+                var imageBox = new PictureBox();
+                imageBox.Width = 192;
+                imageBox.Height = 108;
+                imageBox.Load(spotlightImage.FullPath);
+                imageBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                imageBox.Parent = pnImageContainer;
+                imageBox.Top = 8;
+                imageBox.Left = 8 + (200 * imageNumber);
+                imageBox.DoubleClick += ImageBox_DoubleClick;
+
+                imageNumber++;
+            }
+        }
+
+        private void ImageBox_DoubleClick(object sender, EventArgs e)
+        {
+            var imageBox = (PictureBox)sender;
+            var imagePreview = new ImagePreview(imageBox.ImageLocation);
+            imagePreview.ShowDialog();
         }
     }
 }
