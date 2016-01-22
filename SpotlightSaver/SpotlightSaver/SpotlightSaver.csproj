@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\SpotlightImage.cs" />
     <Compile Include="Domain\SpotlightImageService.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

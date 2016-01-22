@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpotlightSaver.Domain
 {
@@ -23,17 +21,42 @@ namespace SpotlightSaver.Domain
             return driveInfo.FullName;
         }
 
-        public List<string> GetFileNames()
+        public List<SpotlightImage> GetSpotlightImages()
         {
             var folder = new DirectoryInfo(GetSpotlightFolderPath());
-            var fileList = new List<string>();
+            var fileList = new List<SpotlightImage>();
 
-            foreach (var fileName in folder.GetFiles())
+            foreach (var fileInfo in folder.GetFiles())
             {
-                fileList.Add(fileName.Name);
+                var spotlightFile = GetSpotlightImage(fileInfo);
+
+                if (spotlightFile != null)
+                    fileList.Add(spotlightFile);
             }
 
             return fileList;
+        }
+
+        private SpotlightImage GetSpotlightImage(FileInfo fileInfo)
+        {
+            var spotlightImage = new SpotlightImage();
+            spotlightImage.Name = fileInfo.Name;
+            spotlightImage.FullPath = fileInfo.FullName;
+            spotlightImage.Size = (int)fileInfo.Length;
+            spotlightImage.Created = fileInfo.CreationTime;
+
+            try
+            {
+                var image = new Bitmap(fileInfo.FullName);
+                spotlightImage.Width = image.Width;
+                spotlightImage.Height = image.Height;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return spotlightImage;
         }
 
         private DirectoryInfo SearchFor(DirectoryInfo directoryInfo, string partialFolderName)
