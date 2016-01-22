@@ -2,7 +2,7 @@
 
 namespace SpotlightSaver
 {
-    partial class Form1
+    partial class ImageList
     {
         /// <summary>
         /// Required designer variable.

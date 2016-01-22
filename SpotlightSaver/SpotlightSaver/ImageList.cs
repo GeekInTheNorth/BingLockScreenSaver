@@ -6,9 +6,9 @@ using SpotlightSaver.Domain;
 
 namespace SpotlightSaver
 {
-    public partial class Form1 : Form
+    public partial class ImageList : Form
     {
-        public Form1()
+        public ImageList()
         {
             InitializeComponent();
         }
