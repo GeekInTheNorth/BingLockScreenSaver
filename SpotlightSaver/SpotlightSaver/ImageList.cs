@@ -8,6 +8,10 @@ namespace SpotlightSaver
 {
     public partial class ImageList : Form
     {
+        private const int MaximumImageWidth = 384;
+        private const int MaximumImageHeight = 216;
+        private const int ImageSpacing = 10;
+
         public ImageList()
         {
             InitializeComponent();
@@ -57,13 +61,13 @@ namespace SpotlightSaver
             foreach (var spotlightImage in spotlightImages)
             {
                 var imageBox = new PictureBox();
-                imageBox.Width = 192;
-                imageBox.Height = 108;
+                imageBox.Width = MaximumImageWidth;
+                imageBox.Height = MaximumImageHeight;
                 imageBox.Load(spotlightImage.FullPath);
                 imageBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 imageBox.Parent = pnImageContainer;
                 imageBox.Top = 8;
-                imageBox.Left = 8 + (200 * imageNumber);
+                imageBox.Left = 8 + ((MaximumImageWidth + ImageSpacing)  * imageNumber);
                 imageBox.DoubleClick += ImageBox_DoubleClick;
 
                 imageNumber++;
