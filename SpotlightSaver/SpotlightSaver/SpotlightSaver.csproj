@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Domain\SpotlightImage.cs" />
     <Compile Include="Domain\SpotlightImageService.cs" />
+    <Compile Include="GlobalVariables.cs" />
     <Compile Include="ImageList.cs">
       <SubType>Form</SubType>
     </Compile>

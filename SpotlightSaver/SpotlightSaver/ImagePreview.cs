@@ -7,6 +7,17 @@ namespace SpotlightSaver
 {
     public partial class ImagePreview : Form
     {
+        private string InitialDirectory
+        {
+            get
+            {
+                if (GlobalVariables.UseLastFolderPath)
+                    return GlobalVariables.LastFolderPath;
+
+                return Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            }
+        }
+
         public ImagePreview(SpotlightImage spotlightImage)
         {
             InitializeComponent();
@@ -29,12 +40,16 @@ namespace SpotlightSaver
             var saveDialog = new SaveFileDialog();
             saveDialog.Filter = "JPEG File (*.jpg)|*.jpg|All files (*.*)|*.*";
             saveDialog.CheckFileExists = false;
-            saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            saveDialog.InitialDirectory = InitialDirectory;
             saveDialog.DefaultExt = "jpg";
             saveDialog.AddExtension = true;
             saveDialog.Title = "Save Spotlight Image";
 
-            if (saveDialog.ShowDialog() == DialogResult.OK) SaveFile(saveDialog.FileName);
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                SaveFile(saveDialog.FileName);
+                GlobalVariables.LastFolderPath = Path.GetDirectoryName(saveDialog.FileName);
+            }
         }
 
         private void SaveFile(string fileName)
