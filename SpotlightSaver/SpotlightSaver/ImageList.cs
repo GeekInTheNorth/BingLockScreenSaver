@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using SpotlightSaver.Domain;
@@ -11,6 +12,17 @@ namespace SpotlightSaver
         private const int MaximumImageWidth = 384;
         private const int MaximumImageHeight = 216;
         private const int ImageSpacing = 10;
+
+        private string InitialDirectory
+        {
+            get
+            {
+                if (GlobalVariables.UseLastFolderPath)
+                    return GlobalVariables.LastFolderPath;
+
+                return Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            }
+        }
 
         public ImageList()
         {
@@ -69,6 +81,7 @@ namespace SpotlightSaver
                 imageBox.Top = 8;
                 imageBox.Left = 8 + ((MaximumImageWidth + ImageSpacing)  * imageNumber);
                 imageBox.DoubleClick += ImageBox_DoubleClick;
+                imageBox.MouseDown += ImageBox_MouseDown;
 
                 imageNumber++;
             }
@@ -79,6 +92,19 @@ namespace SpotlightSaver
             var imageBox = (PictureBox)sender;
             var imagePreview = new ImagePreview(imageBox.ImageLocation);
             imagePreview.ShowDialog();
+        }
+
+        private void ImageBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var imageBox = (PictureBox)sender;
+                var fileInfo = new FileInfo(imageBox.ImageLocation);
+                if (!fileInfo.Exists) return;
+
+                var saver = new FileSaver();
+                saver.Save(imageBox.ImageLocation, InitialDirectory);
+            }
         }
     }
 }

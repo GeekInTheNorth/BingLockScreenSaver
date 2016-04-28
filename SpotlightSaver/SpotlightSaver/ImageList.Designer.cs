@@ -125,7 +125,7 @@ namespace SpotlightSaver
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnExit);
             this.Name = "ImageList";
-            this.Text = "Form1";
+            this.Text = "Spotlight Images";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -37,35 +37,8 @@ namespace SpotlightSaver
             var fileInfo = new FileInfo(pbPreview.ImageLocation);
             if (!fileInfo.Exists) return;
 
-            var saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "JPEG File (*.jpg)|*.jpg|All files (*.*)|*.*";
-            saveDialog.CheckFileExists = false;
-            saveDialog.InitialDirectory = InitialDirectory;
-            saveDialog.DefaultExt = "jpg";
-            saveDialog.AddExtension = true;
-            saveDialog.Title = "Save Spotlight Image";
-
-            if (saveDialog.ShowDialog() == DialogResult.OK)
-            {
-                SaveFile(saveDialog.FileName);
-                GlobalVariables.LastFolderPath = Path.GetDirectoryName(saveDialog.FileName);
-            }
-        }
-
-        private void SaveFile(string fileName)
-        {
-            var existingFile = new FileInfo(pbPreview.ImageLocation);
-            var newFile = new FileInfo(fileName);
-
-            if (newFile.Exists)
-            {
-                if (MessageBox.Show("An image by the same name already exists, do you want to replace it?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    newFile.Delete();
-                else
-                    return;
-            }
-
-            existingFile.CopyTo(fileName);
+            var saver = new FileSaver();
+            saver.Save(pbPreview.ImageLocation, InitialDirectory);
         }
     }
 }

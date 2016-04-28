@@ -79,7 +79,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ImagePreview";
-            this.Text = "ImagePreview";
+            this.Text = "Image Preview";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.menuStrip1.ResumeLayout(false);
