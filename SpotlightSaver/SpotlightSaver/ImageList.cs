@@ -82,6 +82,7 @@ namespace SpotlightSaver
                 imageBox.Left = 8 + ((MaximumImageWidth + ImageSpacing)  * imageNumber);
                 imageBox.DoubleClick += ImageBox_DoubleClick;
                 imageBox.MouseDown += ImageBox_MouseDown;
+                imageBox.ContextMenu = null;
 
                 imageNumber++;
             }
